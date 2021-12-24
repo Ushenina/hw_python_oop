@@ -119,12 +119,10 @@ class Swimming(Training):
 
 def read_package(training_type: str, input_data: list) -> Training:
     """Прочитать данные полученные от датчиков."""
-    dictionary: dict = {'SWM': Swimming, 'RUN': Running, 'WLK': SportsWalking}
-    try:
-        if 'SWM' or 'RUN' or 'WLK' in dictionary:
-            return dictionary[training_type](*input_data)
-    except KeyError:
+    record: dict = {'SWM': Swimming, 'RUN': Running, 'WLK': SportsWalking}
+    if training_type not in record:
         raise ValueError("Несоответствующее значение")
+    return record[training_type](*input_data)
 
 
 def main(training: Training) -> None:
